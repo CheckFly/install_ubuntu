@@ -1,6 +1,6 @@
 # Installation
 pip install virtualenvwrapper
-
+VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.6
 # Config à ajouter dans ~/.bashrc ou ~/.profile
 # - dossier contenant les environnements virtuels
 echo "export WORKON_HOME=~/.virtualenvs" >> ~/.bashrc
