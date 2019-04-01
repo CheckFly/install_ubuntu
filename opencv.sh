@@ -106,3 +106,6 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
 	
 make -j$(nproc)
 make install
+
+echo "Variable system OPENCV" >> ~/.bashrc
+echo "export OPENCV_IO_MAX_IMAGE_PIXELS=2000000000000" >> ~/.bashrc
