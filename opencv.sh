@@ -7,7 +7,6 @@ cvVersion="master"
 # Clean build directories
 rm -rf opencv/build
 rm -rf opencv_contrib/build
-rm -rf OpenCV-master-py3
 sudo -rf installation
 
 # Create directory for installation
@@ -62,13 +61,17 @@ sudo apt -y install python3-testresources
 cd $cwd
 ############ For Python 3 ############
 # create virtual environment
-python3 -m venv OpenCV-"$cvVersion"-py3
-echo "# Virtual Environment Wrapper" >> ~/.bashrc
-echo "alias workoncv-$cvVersion=\"source $cwd/OpenCV-$cvVersion-py3/bin/activate\"" >> ~/.bashrc
-source "$cwd"/OpenCV-"$cvVersion"-py3/bin/activate
+#python3 -m venv OpenCV-"$cvVersion"-py3
+#echo "# Virtual Environment Wrapper" >> ~/.bashrc
+#echo "alias workoncv-$cvVersion=\"source $cwd/OpenCV-$cvVersion-py3/bin/activate\"" >> ~/.bashrc
+#source "$cwd"/OpenCV-"$cvVersion"-py3/bin/activate
+VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.6
+source /usr/local/bin/virtualenvwrapper.sh
+mkvirtualenv OpenCV-$cvVersion-py3 -p python3.6
+workon OpenCV-$cvVersion-py3
 
 # now install python libraries within this virtual environment
-pip install numpy scipy matplotlib scikit-image scikit-learn ipython dlib --user
+pip install numpy scipy matplotlib scikit-image scikit-learn ipython dlib
  
 # quit virtual environment
 deactivate
@@ -95,7 +98,7 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
             -D INSTALL_PYTHON_EXAMPLES=ON \
             -D WITH_TBB=ON \
             -D WITH_V4L=ON \
-            -D OPENCV_PYTHON3_INSTALL_PATH=$cwd/OpenCV-$cvVersion-py3/lib/python3.6/site-packages \
+            -D OPENCV_PYTHON3_INSTALL_PATH=~/.virtualenv/OpenCV-$cvVersion-py3/lib/python3.6/site-packages \
         -D WITH_QT=ON \
         -D WITH_OPENGL=ON \
         -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \
